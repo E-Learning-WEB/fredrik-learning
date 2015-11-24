@@ -2,22 +2,25 @@
 		include('code-koneksi.php');
 	if (isset($_POST['upload']))
 	{
-	$waktu = time();
+		$waktu = time();
 		$file =$_FILES['file'];
 		$nama =$_FILES;
-		$fileextensi = substr($file['name'],strpos($file['name'],'.')+1) ;
+		
+		//mengambil extensi file
+		$fileextensi = pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION); 	
 		
 		$judul = $_POST['judul'];
 		
-		if($fileextensi == 'doc' OR $fileextensi == 'docx' OR $fileextensi == 'pdf')
+		if($fileextensi == 'doc' OR $fileextensi == 'docx' OR $fileextensi == 'pdf' OR $fileextensi == 'mp4')
 		{
-		move_uploaded_file($file['tmp_name'],"materi/$file[name]") or die ('gagal');
-			$konten = 'materi = "'.$file['name'].'"';
+			$targetfile = "upload/".$waktu.'_'.$file['name'];
+			move_uploaded_file($file['tmp_name'],$targetfile) or die ('gagal');
+			$konten = 'file = "'.$file['name'].'"';
 		}
 		else
 		{
-		move_uploaded_file($file['tmp_name'],"video/$file[name]") or die ('gagal');
-			$konten = 'video ="'. $file['name']. '"';		
+			echo 'tipe file tidak diperbolehkan';
+			die();
 		}
 		
 		$sql="Insert into tbmateri set judul = '$judul',
@@ -36,8 +39,6 @@
 <table width="100%" border="1">
   <tr>
     <td>Judul </td>
-    <td>Materi</td>
-	<td>Video</td>
 	<td>Waktu</td>
   </tr>
   <?php
@@ -49,8 +50,6 @@
  <tr>
      <td><a href="tampil.php?id=<?php echo $row['id'] ?>">
 	 <?php echo $row['judul'] ?></a></td>
-	  <td><?php echo $row['materi'] ?></td>
-	   <td><?php echo $row['video'] ?></td>
 	   <td><?php echo date('d-M-Y H:i:s A',$row['waktu']) ?></td>
   </tr>
 <?php
