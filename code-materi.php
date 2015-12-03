@@ -1,7 +1,5 @@
 <?php
-
-
-	if (isset($_POST['tbmateri']))
+if (isset($_POST['tbmateri']))
 	{
 		$judul = $_POST['judul'];
 		$materi = $_POST['materi'];
