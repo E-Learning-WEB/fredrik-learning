@@ -53,7 +53,11 @@
 										$konten
 										WHERE id = '$_GET[edit]'
 										";	
-		echo $sql;										
+		echo $sql;		
+		
+	
+		if($_FILES["file"]["error"] == 0) 
+		{										
 			if (!unlink($filesebelumnya))
 			  {
 				  $pesan .= "FIle Gagal dihapus";
@@ -64,7 +68,8 @@
 				  $pesan .=  "File Dihapus";
 			  }		
 																		
-									
+		}
+		
 		mysql_query($sql);
 }?>
 
