@@ -40,6 +40,7 @@
   <tr>
     <td>Judul </td>
 	<td>Waktu</td>
+   	<td>Aksi</td>
   </tr>
   <?php
   $sql = 'select * from tbmateri';
@@ -51,6 +52,7 @@
      <td><a href="tampil.php?id=<?php echo $row['id'] ?>">
 	 <?php echo $row['judul'] ?></a></td>
 	   <td><?php echo date('d-M-Y H:i:s A',$row['waktu']) ?></td>
+      <td><a href="proses.php?aksi=hapusmateri&id=<?php echo $row['id']?>">Delete</a></td>
   </tr>
 <?php
 }
