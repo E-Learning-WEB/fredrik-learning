@@ -1,5 +1,19 @@
 <?php
 class fungsi{
+
+	public function hashacak($jumlah = null,$hurufbesar = null)
+	{		
+		if(empty($jumlah)){$jumlah=4;}
+		
+		if(empty($hurufbesar))
+		{$huruf = '2346789ABCDEFGHJKLMNPRTUVWXYZ';}
+		else{$huruf = '12346789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';}
+		$hashacak = NULL;
+			for ($i = 0; $i < $jumlah; $i++) {
+				$hashacak .= $huruf[rand(0, strlen($huruf) - 1)];
+			}	
+		return $hashacak;	
+	}
 	
 	public function idanggota_to_username($uid){
 	
@@ -55,7 +69,7 @@ class fungsi{
 		return $validasiinput;			
 	}//akhir validasiinput
 	
-	
+		
 
 
 }
